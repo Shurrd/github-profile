@@ -10,3 +10,8 @@ body {
     "Helvetica Neue", sans-serif;
   text-rendering: optimizeSpeed;
 }
+
+::selection {
+  background-color: gray;
+  color: white;
+}

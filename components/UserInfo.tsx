@@ -5,15 +5,19 @@ import Link from "next/link";
 import { IoCalendarOutline, IoLocationOutline } from "react-icons/io5";
 
 const UserInfo = ({ userData }: { userData: IUser }) => {
+  const card =
+    "bg-gray-700 text-white flex flex-col gap-1 items-center justify-center text-2xl py-4 px-8 rounded";
+  const cardText = "text-gray-400 text-sm uppercase font-semibold";
+
   return (
-    <section className="h-[90vh] bg-[#24292e] flex flex-col justify-center items-center">
-      <div className="flex flex-col items-center justify-center">
+    <section className="h-[95vh] bg-[#24292e] flex flex-col justify-center items-center">
+      <div className="flex flex-col items-center justify-center gap-4 pb-20">
         {userData.avatar_url && (
-          <div className="border-[10px] h-max w-max rounded-full border-blue-600">
+          <div className="border-8 h-max w-max rounded-full border-blue-600">
             <img
               src={userData.avatar_url}
               alt={userData.name}
-              className="h-full w-36 rounded-full"
+              className="h-full w-32 rounded-full"
             />
           </div>
         )}
@@ -22,26 +26,63 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
             {userData.name}
           </p>
         )}
+        {userData.bio && (
+          <p className="text-xl text-gray-200">{userData.bio}</p>
+        )}
         {userData.login && (
           <Link href={userData?.html_url}>
             <a>
-              <p className="text-blue-500 text-3xl hover:underline cursor-pointer">
+              <p className="text-blue-600 text-2xl hover:underline cursor-pointer">
                 @{userData.login}
               </p>
             </a>
           </Link>
         )}
-        {userData.location && (
-          <div className="flex items-center text-gray-300">
-            <p>
-              <IoLocationOutline />
-            </p>
-            <p>{userData.location}</p>
-          </div>
-        )}
-        )
+        <div className="flex items-center text-gray-400 gap-8">
+          {userData.location && (
+            <div className="flex items-center justify-center gap-2">
+              <p>
+                <IoLocationOutline />
+              </p>
+              <p>{userData.location}</p>
+            </div>
+          )}
+          {userData.created_at && (
+            <div className="flex items-center justify-center gap-2">
+              <p>
+                <IoCalendarOutline />
+              </p>
+              <p>
+                {new Date(userData.created_at).toLocaleString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="flex gap-3 mt-4">
+          {userData.followers && (
+            <div className={card}>
+              <p>{userData.followers}</p>
+              <p className={cardText}>Followers</p>
+            </div>
+          )}
+          {userData.following && (
+            <div className={card}>
+              <p>{userData.following}</p>
+              <p className={cardText}>Following</p>
+            </div>
+          )}
+          {userData.public_repos && (
+            <div className={card}>
+              <p>{userData.public_repos}</p>
+              <p className={cardText}>Repositories</p>
+            </div>
+          )}
+        </div>
       </div>
-      <div></div>
     </section>
   );
 };
