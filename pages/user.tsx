@@ -4,11 +4,13 @@ import Head from "next/head";
 import UserInfo from "../components/UserInfo";
 import Loading from "../components/Loading";
 import GhPolyglot from "gh-polyglot";
+import Charts from "../components/Charts";
+import { ILanguageData, IUser } from "../types";
 
 const User = () => {
-  const [userData, setUserData] = useState<any>([]);
+  const [userData, setUserData] = useState<IUser | any>([]);
   const [loading, setLoading] = useState(true);
-  const [languageData, setLanguageData] = useState([]);
+  const [languageData, setLanguageData] = useState<ILanguageData | any>([]);
 
   const router = useRouter();
   const username = router.query.username;
@@ -44,8 +46,6 @@ const User = () => {
     fetchLanguageData();
   }, []);
 
-  console.log(languageData);
-
   if (loading) {
     return <Loading />;
   }
@@ -58,6 +58,7 @@ const User = () => {
         </title>
       </Head>
       <UserInfo userData={userData} />
+      <Charts languageData={languageData} />
     </>
   );
 };

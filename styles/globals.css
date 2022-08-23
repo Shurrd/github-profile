@@ -4,6 +4,11 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Fira+Sans:wght@500;800;900&display=swap");
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
 body {
   font-family: apple-system, BlinkMacSystemFont, "Fira Sans", "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",

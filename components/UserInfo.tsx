@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IUser } from "../types";
 import Link from "next/link";
 import { IoCalendarOutline, IoLocationOutline } from "react-icons/io5";
 
 const UserInfo = ({ userData }: { userData: IUser }) => {
   const card =
-    "bg-gray-700 text-white flex flex-col gap-1 items-center justify-center text-2xl py-4 px-6 lg:px-8 rounded";
-  const cardText = "text-gray-400 text-sm uppercase font-semibold";
+    "bg-gray-700 text-white flex flex-col gap-1 items-center justify-center text-2xl py-2 px-5 lg:px-7 rounded w-28 md:w-full";
+  const cardText = "text-gray-400 text-[10px] uppercase font-semibold";
 
   return (
-    <section className="h-[95vh] bg-[#24292e] flex flex-col justify-center items-center">
-      <div className="flex flex-col items-center justify-center gap-4 pb-20">
+    <section className="h-[85vh] lg:h-[95vh] bg-[#24292e] flex flex-col pt-10">
+      <div className="flex flex-col items-center justify-center gap-4 w-full">
         {userData.avatar_url && (
           <div className="border-8 h-max w-max rounded-full border-blue-600">
             <img
@@ -61,7 +61,7 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
             </div>
           )}
         </div>
-        <div className="flex gap-3 mt-4">
+        <div className="flex gap-5 mt-4">
           {userData.followers && (
             <div className={card}>
               <p>{userData.followers}</p>
