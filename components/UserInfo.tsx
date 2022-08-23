@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IUser } from "../types";
-import Image from "next/image";
 import Link from "next/link";
 import { IoCalendarOutline, IoLocationOutline } from "react-icons/io5";
 
 const UserInfo = ({ userData }: { userData: IUser }) => {
   const card =
-    "bg-gray-700 text-white flex flex-col gap-1 items-center justify-center text-2xl py-4 px-8 rounded";
+    "bg-gray-700 text-white flex flex-col gap-1 items-center justify-center text-2xl py-4 px-6 lg:px-8 rounded";
   const cardText = "text-gray-400 text-sm uppercase font-semibold";
 
   return (

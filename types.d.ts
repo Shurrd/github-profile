@@ -11,3 +11,11 @@ export interface IUser {
   following: number;
   created_at: string;
 }
+
+export type ILanguageData = [
+  {
+    label: string;
+    value: number;
+    color: string;
+  }
+];
