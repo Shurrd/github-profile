@@ -64,13 +64,13 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
         <div className="flex gap-5 mt-4">
           {userData.followers && (
             <div className={card}>
-              <p>{userData.followers}</p>
+              <p>{userData.followers.toLocaleString()}</p>
               <p className={cardText}>Followers</p>
             </div>
           )}
           {userData.following && (
             <div className={card}>
-              <p>{userData.following}</p>
+              <p>{userData.following.toLocaleString()}</p>
               <p className={cardText}>Following</p>
             </div>
           )}

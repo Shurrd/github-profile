@@ -1,7 +1,7 @@
 import React from "react";
 
-const mostStarredLanguages = () => {
+const MostStarredLanguages = () => {
   return <div>mostStarredLanguages</div>;
 };
 
-export default mostStarredLanguages;
+export default MostStarredLanguages;

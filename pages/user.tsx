@@ -53,8 +53,15 @@ const User = () => {
   return (
     <>
       <Head>
-        <title>
-          {`${username ? `OctoProfile | ${username}` : "OctoProfile"}`}
+        <title className="capitalize">
+          {`${
+            username
+              ? `OctoProfile | ${
+                  username.toString().charAt(0).toUpperCase() +
+                  username.slice(1)
+                }`
+              : "OctoProfile"
+          }`}
         </title>
       </Head>
       <UserInfo userData={userData} />
