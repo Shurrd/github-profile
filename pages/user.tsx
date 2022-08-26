@@ -5,12 +5,14 @@ import UserInfo from "../components/UserInfo";
 import Loading from "../components/Loading";
 import GhPolyglot from "gh-polyglot";
 import Charts from "../components/Charts";
-import { ILanguageData, IUser } from "../types";
+import { ILanguageData, IRepoData, IUser } from "../types";
 
 const User = () => {
   const [userData, setUserData] = useState<IUser | any>([]);
   const [languageData, setLanguageData] = useState<ILanguageData | any>([]);
-  const [repoData, setRepoData] = useState<any>([]);
+  const [repoData, setRepoData] = useState<IRepoData | any>([]);
+  const [sortedStars, setSortedStars] = useState<IRepoData | any>([]);
+  const [starredLanguages, setStarredLanguages] = useState<IRepoData | any>([]);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -35,7 +37,7 @@ const User = () => {
   // fetching language data
   const fetchLanguageData = (): void => {
     const me = new GhPolyglot(`${username}`);
-    me.userStats((err: any, stats: any) => {
+    me.userStats((err: string, stats: any) => {
       if (err) {
         console.error("Error:", err);
       }
@@ -43,17 +45,23 @@ const User = () => {
     });
   };
 
-  // fetching user repo data
-  const fetchRepoData = async () => {
-    try {
-      const response = await fetch(userRepoUrl);
-      const data = await response.json();
-      setRepoData(data);
-    } catch (error) {
-      console.error(error);
-    }
+  // fetching repo data and sorted them by the most starred
+  const fetchRepoData = () => {
+    const me = new GhPolyglot(`${username}/git-stats`);
+    me.getAllRepos((err: string, stats: any[]) => {
+      if (err) {
+        console.log(err);
+      } else {
+        const repos = stats
+          .sort((a, b) => b.stargazers_count - a.stargazers_count)
+          .map((item) => item);
+        const slicedRepos = repos.slice(0, 10);
+        setSortedStars(slicedRepos);
+        setRepoData(slicedRepos);
+        setStarredLanguages(repos);
+      }
+    });
   };
-
   useEffect(() => {
     fetchUserData();
     fetchLanguageData();
@@ -79,7 +87,11 @@ const User = () => {
         </title>
       </Head>
       <UserInfo userData={userData} />
-      <Charts languageData={languageData} repoData={repoData} />
+      <Charts
+        languageData={languageData}
+        sortedStars={sortedStars}
+        starredLanguages={starredLanguages}
+      />
     </>
   );
 };

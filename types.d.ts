@@ -12,6 +12,19 @@ export interface IUser {
   created_at: string;
 }
 
+export type IRepoData = [
+  {
+    name: string;
+    id: number;
+    html_url: string;
+    size: number;
+    stargazers_count: number;
+    language: string;
+    forks_count: number;
+    description: string;
+  }
+];
+
 export type ILanguageData = [
   {
     label: string;
@@ -20,8 +33,6 @@ export type ILanguageData = [
   }
 ];
 
-export type IRepoData = [{}];
-
 interface IChart {
   title: string;
   children: React.ReactNode;
@@ -29,5 +40,7 @@ interface IChart {
 
 export interface IProps {
   languageData?: ILanguageData;
-  repoData?: any;
+  repoData?: IRepoData;
+  sortedStars?: IRepoData;
+  starredLanguages?: IRepoData;
 }
