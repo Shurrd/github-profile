@@ -19,3 +19,15 @@ export type ILanguageData = [
     color: string;
   }
 ];
+
+export type IRepoData = [{}];
+
+interface IChart {
+  title: string;
+  children: React.ReactNode;
+}
+
+export interface IProps {
+  languageData?: ILanguageData;
+  repoData?: any;
+}

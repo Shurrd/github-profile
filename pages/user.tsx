@@ -9,18 +9,20 @@ import { ILanguageData, IUser } from "../types";
 
 const User = () => {
   const [userData, setUserData] = useState<IUser | any>([]);
-  const [loading, setLoading] = useState(true);
   const [languageData, setLanguageData] = useState<ILanguageData | any>([]);
+  const [repoData, setRepoData] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
   const username = router.query.username;
-  const url = `https://api.github.com/users/${username}`;
+  const userUrl = `https://api.github.com/users/${username}`;
+  const userRepoUrl = `https://api.github.com/users/${username}/repos?per_page=100`;
 
   // fetching user data
   const fetchUserData = async (): Promise<any> => {
     setLoading(true);
     try {
-      const response = await fetch(url);
+      const response = await fetch(userUrl);
       const userData = await response.json();
       setUserData(userData);
       setLoading(false);
@@ -41,9 +43,21 @@ const User = () => {
     });
   };
 
+  // fetching user repo data
+  const fetchRepoData = async () => {
+    try {
+      const response = await fetch(userRepoUrl);
+      const data = await response.json();
+      setRepoData(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchUserData();
     fetchLanguageData();
+    fetchRepoData();
   }, []);
 
   if (loading) {
@@ -65,7 +79,7 @@ const User = () => {
         </title>
       </Head>
       <UserInfo userData={userData} />
-      <Charts languageData={languageData} />
+      <Charts languageData={languageData} repoData={repoData} />
     </>
   );
 };

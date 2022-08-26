@@ -1,7 +1,8 @@
 import React from "react";
+import ChartContainer from "./ChartContainer";
 
 const StarsPerLanguage = () => {
-  return <div>StarsPerLanguage</div>;
+  return <ChartContainer title="Stars per Language">{}</ChartContainer>;
 };
 
 export default StarsPerLanguage;

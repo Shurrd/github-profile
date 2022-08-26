@@ -1,9 +1,10 @@
 import React from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
-import { ILanguageData } from "../../types";
+import { IProps } from "../../types";
+import ChartContainer from "./ChartContainer";
 
-const TopLanguages = ({ languageData }: { languageData: ILanguageData }) => {
+const TopLanguages = ({ languageData }: IProps) => {
   const language = languageData?.map((lang) => lang.label);
   const value = languageData?.map((lang) => lang.value);
   const color = languageData?.map((lang) => lang.color);
@@ -21,12 +22,9 @@ const TopLanguages = ({ languageData }: { languageData: ILanguageData }) => {
   };
 
   return (
-    <div className="bg-white py-6 shadow-md rounded-md md:-mt-16 -mt-0 z-50 w-[24rem] flex items-center justify-center flex-col">
-      <p className="text-center mb-5 pb-2 text-2xl font-semibold text-gray-700 border-dashed border-b-2 w-max">
-        Top Languages
-      </p>
+    <ChartContainer title="Top Languages">
       <Pie data={data} />
-    </div>
+    </ChartContainer>
   );
 };
 

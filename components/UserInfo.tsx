@@ -26,7 +26,7 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
           </p>
         )}
         {userData.bio && (
-          <p className="text-xl text-gray-200">{userData.bio}</p>
+          <p className="md:text-xl text-center text-gray-200">{userData.bio}</p>
         )}
         {userData.login && (
           <Link href={userData?.html_url}>
