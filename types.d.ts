@@ -10,6 +10,7 @@ export interface IUser {
   followers: number;
   following: number;
   created_at: string;
+  company: string;
 }
 
 export type IRepoData = [
@@ -22,8 +23,19 @@ export type IRepoData = [
     language: string;
     forks_count: number;
     description: string;
+    html_url: string;
   }
 ];
+export interface IRepo {
+  name: string;
+  id: number;
+  html_url: string;
+  size: number;
+  stargazers_count: number;
+  language: string;
+  forks_count: number;
+  description: string;
+}
 
 export type ILanguageData = [
   {

@@ -1,7 +1,11 @@
 import React from "react";
 import { IUser } from "../types";
 import Link from "next/link";
-import { IoCalendarOutline, IoLocationOutline } from "react-icons/io5";
+import {
+  IoCalendarOutline,
+  IoLocationOutline,
+  IoBriefcase,
+} from "react-icons/io5";
 
 const UserInfo = ({ userData }: { userData: IUser }) => {
   const card =
@@ -38,6 +42,14 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
           </Link>
         )}
         <div className="flex items-center text-gray-400 gap-8">
+          {userData.company && (
+            <div className="flex items-center justify-center gap-2">
+              <p>
+                <IoBriefcase />
+              </p>
+              <p>{userData.company}</p>
+            </div>
+          )}
           {userData.location && (
             <div className="flex items-center justify-center gap-2">
               <p>

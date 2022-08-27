@@ -6,6 +6,7 @@ import Loading from "../components/Loading";
 import GhPolyglot from "gh-polyglot";
 import Charts from "../components/Charts";
 import { ILanguageData, IRepoData, IUser } from "../types";
+import Filter from "../components/Filter";
 
 const User = () => {
   const [userData, setUserData] = useState<IUser | any>([]);
@@ -55,7 +56,7 @@ const User = () => {
         const repos = stats
           .sort((a, b) => b.stargazers_count - a.stargazers_count)
           .map((item) => item);
-        const slicedRepos = repos.slice(0, 10);
+        const slicedRepos = repos.slice(0, 8);
         setSortedStars(slicedRepos);
         setRepoData(slicedRepos);
         setStarredLanguages(repos);
@@ -92,6 +93,7 @@ const User = () => {
         sortedStars={sortedStars}
         starredLanguages={starredLanguages}
       />
+      <Filter repoData={repoData} />
     </>
   );
 };
