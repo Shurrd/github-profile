@@ -98,7 +98,7 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
           )}
           {userData.public_repos !== 0 ? (
             <div className={card}>
-              <p>{userData.public_repos.toLocaleString()}</p>
+              <p>{userData.public_repos?.toLocaleString()}</p>
               <p className={cardText}>Repositories</p>
             </div>
           ) : (

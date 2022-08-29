@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import UserInfo from "../components/UserInfo";
-import Loading from "../components/Loading";
 import GhPolyglot from "gh-polyglot";
-import Charts from "../components/Charts";
-import { ILanguageData, IRepo, IRepoData, IUser } from "../types";
+import { ILanguageData, IRepoData, IUser } from "../types";
+
 import Filter from "../components/Filter";
+import Charts from "../components/Charts";
+import Loading from "../components/Loading";
+import UserInfo from "../components/UserInfo";
 import Repos from "../components/Repos";
 import Footer from "../components/Footer";
+import Error from "../components/Error";
 
 const User = () => {
   const [userData, setUserData] = useState<IUser | any>([]);
@@ -16,6 +18,7 @@ const User = () => {
   const [repoData, setRepoData] = useState<IRepoData | any>([]);
   const [sortedStars, setSortedStars] = useState<IRepoData | any>([]);
   const [starredLanguages, setStarredLanguages] = useState<IRepoData | any>([]);
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -34,6 +37,7 @@ const User = () => {
     } catch (error) {
       console.log(error);
       setLoading(false);
+      setError(true);
     }
   };
 
@@ -43,6 +47,7 @@ const User = () => {
     me.userStats((err: string, stats: any) => {
       if (err) {
         console.error("Error:", err);
+        setError(true);
       }
       setLanguageData(stats);
     });
@@ -62,6 +67,7 @@ const User = () => {
       setStarredLanguages(repoList);
     } catch (error) {
       console.log(error);
+      setError(true);
     }
   };
 
@@ -95,6 +101,9 @@ const User = () => {
 
   if (loading) {
     return <Loading />;
+  }
+  if (error) {
+    return <Error />;
   }
 
   return (
