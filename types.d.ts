@@ -55,4 +55,5 @@ export interface IProps {
   repoData?: IRepoData;
   sortedStars?: IRepoData;
   starredLanguages?: IRepoData;
+  handleChange?;
 }

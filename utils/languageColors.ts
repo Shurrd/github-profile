@@ -197,6 +197,7 @@ const languageColors: { [key: string]: string } = {
   "AGS Script": "#B9D9FF",
   Dogescript: "#cca760",
   nesC: "#94B0C7",
+  "ASP.NET": "#0a0a9e",
 };
 
 export default languageColors;

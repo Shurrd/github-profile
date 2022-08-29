@@ -64,7 +64,7 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
                 <IoCalendarOutline />
               </p>
               <p>
-                {new Date(userData.created_at).toLocaleString("en-US", {
+                {new Date(userData.created_at)?.toLocaleString("en-US", {
                   month: "long",
                   day: "numeric",
                   year: "numeric",
@@ -74,21 +74,36 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
           )}
         </div>
         <div className="flex gap-5 mt-4">
-          {userData.followers && (
+          {userData.followers !== 0 ? (
             <div className={card}>
-              <p>{userData.followers.toLocaleString()}</p>
+              <p>{userData.followers?.toLocaleString()}</p>
+              <p className={cardText}>Followers</p>
+            </div>
+          ) : (
+            <div className={card}>
+              <p>0</p>
               <p className={cardText}>Followers</p>
             </div>
           )}
-          {userData.following && (
+          {userData.following !== 0 ? (
             <div className={card}>
-              <p>{userData.following.toLocaleString()}</p>
-              <p className={cardText}>Following</p>
+              <p>{userData.following?.toLocaleString()}</p>
+              <p className={cardText}>Followers</p>
+            </div>
+          ) : (
+            <div className={card}>
+              <p>0</p>
+              <p className={cardText}>Followers</p>
             </div>
           )}
-          {userData.public_repos && (
+          {userData.public_repos !== 0 ? (
             <div className={card}>
               <p>{userData.public_repos}</p>
+              <p className={cardText}>Repositories</p>
+            </div>
+          ) : (
+            <div className={card}>
+              <p>0</p>
               <p className={cardText}>Repositories</p>
             </div>
           )}

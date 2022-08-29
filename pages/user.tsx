@@ -5,8 +5,9 @@ import UserInfo from "../components/UserInfo";
 import Loading from "../components/Loading";
 import GhPolyglot from "gh-polyglot";
 import Charts from "../components/Charts";
-import { ILanguageData, IRepoData, IUser } from "../types";
+import { ILanguageData, IRepo, IRepoData, IUser } from "../types";
 import Filter from "../components/Filter";
+import Repos from "../components/Repos";
 
 const User = () => {
   const [userData, setUserData] = useState<IUser | any>([]);
@@ -14,6 +15,7 @@ const User = () => {
   const [repoData, setRepoData] = useState<IRepoData | any>([]);
   const [sortedStars, setSortedStars] = useState<IRepoData | any>([]);
   const [starredLanguages, setStarredLanguages] = useState<IRepoData | any>([]);
+  const [unslicedRepo, setUnslicedRepo] = useState<IRepoData | any>([]);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -46,23 +48,45 @@ const User = () => {
     });
   };
 
-  // fetching repo data and sorted them by the most starred
-  const fetchRepoData = () => {
-    const me = new GhPolyglot(`${username}/git-stats`);
-    me.getAllRepos((err: string, stats: any[]) => {
-      if (err) {
-        console.log(err);
-      } else {
-        const repos = stats
-          .sort((a, b) => b.stargazers_count - a.stargazers_count)
-          .map((item) => item);
-        const slicedRepos = repos.slice(0, 8);
-        setSortedStars(slicedRepos);
-        setRepoData(slicedRepos);
-        setStarredLanguages(repos);
-      }
-    });
+  // fetching repo data and sorting them by the most starred
+  const fetchRepoData = async () => {
+    try {
+      const response = await fetch(userRepoUrl);
+      const repoData = await response.json();
+      const repoList = [...repoData]
+        .sort((a, b) => b.stargazers_count - a.stargazers_count)
+        .map((item) => item);
+      const slicedRepos = repoList.slice(0, 8);
+      setSortedStars(slicedRepos);
+      setRepoData(slicedRepos);
+      setStarredLanguages(repoList);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  // sorting the repos by value
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    if (repoData) {
+      const repoList = [...repoData];
+      if (value === "stars") {
+        const sorted = repoList.sort(
+          (a, b) => b.stargazers_count - a.stargazers_count
+        );
+        setRepoData(sorted);
+      }
+      if (value === "forks") {
+        const sorted = repoList.sort((a, b) => b.forks_count - a.forks_count);
+        setRepoData(sorted);
+      }
+      if (value === "size") {
+        const sorted = repoList.sort((a, b) => b.size - a.size);
+        setRepoData(sorted);
+      }
+    } else return;
+  };
+
   useEffect(() => {
     fetchUserData();
     fetchLanguageData();
@@ -93,7 +117,10 @@ const User = () => {
         sortedStars={sortedStars}
         starredLanguages={starredLanguages}
       />
-      <Filter repoData={repoData} />
+      <div className="px-20 lg:px-24 pt-16 bg-gray-50">
+        <Filter repoData={repoData} handleChange={handleChange} />
+        <Repos repoData={repoData} />
+      </div>
     </>
   );
 };
