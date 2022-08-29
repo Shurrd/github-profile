@@ -11,7 +11,7 @@ const Filter = ({ handleChange }: IProps) => {
       <select
         name=""
         id=""
-        className="h-10 border w-28 -mt-5 outline-none bg-gray-100 text-gray-800 font-semibold rounded"
+        className="h-10 border w-28 -mt-5 pl-3 outline-none bg-gray-100 text-gray-800 font-semibold rounded"
         onChange={handleChange}
       >
         <option value="stars">Stars</option>

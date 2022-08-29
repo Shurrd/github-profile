@@ -8,6 +8,7 @@ import Charts from "../components/Charts";
 import { ILanguageData, IRepo, IRepoData, IUser } from "../types";
 import Filter from "../components/Filter";
 import Repos from "../components/Repos";
+import Footer from "../components/Footer";
 
 const User = () => {
   const [userData, setUserData] = useState<IUser | any>([]);
@@ -15,7 +16,6 @@ const User = () => {
   const [repoData, setRepoData] = useState<IRepoData | any>([]);
   const [sortedStars, setSortedStars] = useState<IRepoData | any>([]);
   const [starredLanguages, setStarredLanguages] = useState<IRepoData | any>([]);
-  const [unslicedRepo, setUnslicedRepo] = useState<IRepoData | any>([]);
   const [loading, setLoading] = useState(true);
 
   const router = useRouter();
@@ -120,6 +120,7 @@ const User = () => {
       <div className="px-20 lg:px-24 pt-16 bg-gray-50">
         <Filter repoData={repoData} handleChange={handleChange} />
         <Repos repoData={repoData} />
+        <Footer />
       </div>
     </>
   );

@@ -12,7 +12,7 @@ const Repo = ({
   stargazers_count,
 }: IRepo) => {
   return (
-    <div className="flex flex-col justify-between bg-white px-6 py-8 shadow-md hover:shadow gap-6 duration-300 h-56 sm:h-48">
+    <div className="flex flex-col justify-between bg-white px-4 lg:px-6 py-8 shadow-md hover:shadow gap-6 duration-300 h-56 sm:h-48 md:h-52 lg:h-48">
       <div className="flex gap-4 items-center text-xl font-semibold text-gray-900">
         <p>
           <GoRepo />
@@ -27,9 +27,9 @@ const Repo = ({
         </p>
       )}
       <div className="flex justify-between">
-        <div className="flex gap-1 md:gap-6">
+        <div className="flex gap-1 lg:gap-4">
           {language && (
-            <div className="flex items-center gap-[0.1rem] sm:gap-2 text-gray-500 text-sm">
+            <div className="flex items-center gap-[0.1rem] md:gap-2 text-gray-500 text-sm">
               <div
                 style={{
                   backgroundColor: languageColors[language],
@@ -41,13 +41,13 @@ const Repo = ({
               <p className="text-sm text-gray-500">{language}</p>
             </div>
           )}
-          <div className="flex items-center gap-[0.1rem] sm:gap-2 text-gray-500 text-sm">
+          <div className="flex items-center gap-[0.1rem] sm:gap-1 text-gray-500 text-sm">
             <p>
               <GoStar />
             </p>
             <p>{stargazers_count?.toLocaleString()}</p>
           </div>
-          <div className="flex items-center gap-[0.1rem] sm:gap-2 text-gray-500 text-sm">
+          <div className="flex items-center gap-[0.1rem] sm:gap-1 text-gray-500 text-sm">
             <p>
               <GoRepoForked />
             </p>

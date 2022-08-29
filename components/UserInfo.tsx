@@ -88,17 +88,17 @@ const UserInfo = ({ userData }: { userData: IUser }) => {
           {userData.following !== 0 ? (
             <div className={card}>
               <p>{userData.following?.toLocaleString()}</p>
-              <p className={cardText}>Followers</p>
+              <p className={cardText}>Following</p>
             </div>
           ) : (
             <div className={card}>
               <p>0</p>
-              <p className={cardText}>Followers</p>
+              <p className={cardText}>Following</p>
             </div>
           )}
           {userData.public_repos !== 0 ? (
             <div className={card}>
-              <p>{userData.public_repos}</p>
+              <p>{userData.public_repos.toLocaleString()}</p>
               <p className={cardText}>Repositories</p>
             </div>
           ) : (
