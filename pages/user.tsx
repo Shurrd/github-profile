@@ -100,7 +100,7 @@ const User = () => {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return <Loading username={username} />;
   }
   if (error) {
     return <Error />;
@@ -109,7 +109,7 @@ const User = () => {
   return (
     <>
       <Head>
-        <title className="capitalize">
+        <title>
           {`${
             username
               ? `OctoProfile | ${

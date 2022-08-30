@@ -54,7 +54,7 @@ const Repo = ({
             <p>{forks_count?.toLocaleString()}</p>
           </div>
         </div>
-        <p className="md:text-sm text-[8px] text-gray-600 font-semibold">
+        <p className="text-sm md:text-[10px] text-gray-600 font-semibold">
           {size?.toLocaleString()} KB
         </p>
       </div>
