@@ -4,7 +4,7 @@ import { GoStar } from "react-icons/go";
 
 const Footer = () => {
   return (
-    <footer className="text-center py-10 text-blue-500 md:text-[8px] text-sm font-semibold flex flex-col gap-3">
+    <footer className="text-center py-10 text-blue-500 md:text-[8px] text-[10px] font-semibold flex flex-col gap-3">
       <p className="tracking-wider">
         Original Idea by{" "}
         <Link href="https://octoprofile.vercel.app/">
