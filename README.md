@@ -11,5 +11,5 @@ This Projects uses Next JS and other dependencies like
 ## Getting Started
 
 1. Fork or clone the repository
-2. Cd into the repository and run `npm install`
+2. Open your CLI and go into the directory and run `npm install`
 3. Once the packages are installed, run `npm run dev` to start the server at `localhost:3000`
