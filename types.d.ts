@@ -45,7 +45,7 @@ export type ILanguageData = [
   }
 ];
 
-interface IChart {
+export interface IChart {
   title: string;
   children: React.ReactNode;
 }
